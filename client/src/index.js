@@ -10,7 +10,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import reducers from "./reducers";
 
 import './index.css';
-import App from './pages/FrontPage';
+import App from './pages/App';
 const store = createStore(
     reducers,
     composeWithDevTools(
