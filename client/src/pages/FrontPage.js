@@ -18,7 +18,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Header />
-				<a href="/auth/google">Log In</a>
+
 
 				<div className="container">
 					<h1 className="center">Welcome to my React Projects Page</h1>

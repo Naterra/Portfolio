@@ -3,8 +3,8 @@ import * as types  from './types';
 
 //Action Creator
 
-export function fetchUser(id) {
-    const request = axios.get(`/auth/current_user`, { id: id });
+export function fetchUser() {
+    const request = axios.get(`/auth/current_user`);
 
     return {
         type: types.FETCH_USER,
