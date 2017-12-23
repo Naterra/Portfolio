@@ -6,21 +6,27 @@ import Projects from '../components/Projects';
 import 'materialize-css/dist/js/materialize.min.js';
 import 'materialize-css/dist/css/materialize.min.css';
 
+import { connect } from 'react-redux';
+import { fetchUser } from '../actions';
+
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-          <Header />
-          <a href="/auth/google">Log In</a>
+	componentDidMount() {
+		this.props.fetchUser();
+	}
 
-          <div className="container">
-            <h1 className="center">Welcome to my React Projects Page</h1>
-              <Projects />
+	render() {
+		return (
+			<div className="App">
+				<Header />
+				<a href="/auth/google">Log In</a>
 
-          </div>
-      </div>
-    );
-  }
+				<div className="container">
+					<h1 className="center">Welcome to my React Projects Page</h1>
+					<Projects />
+				</div>
+			</div>
+		);
+	}
 }
 
-export default App;
+export default connect(null, {fetchUser} )(App);
