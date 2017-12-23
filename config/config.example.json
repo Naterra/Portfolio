@@ -1,0 +1,9 @@
+{
+  "serverPort": "3001",
+  "db":{
+    "name": "",
+    "user": "",
+    "password": 12345,
+    "port": 33746
+  }
+}

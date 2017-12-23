@@ -1,0 +1,16 @@
+{
+  "serverPort": "3001",
+  "cookieKey":"jhgbdjfjdkfdlmf;l;pkkm",
+  "db":{
+    "name": "my_portfolio",
+    "user": "naterra",
+    "password": 305762,
+    "port": 55505,
+    "ds": "055505"
+  },
+  "googleAuth":{
+    "googleClientId" :"589167099125-mnlnk7out2cp2gghds6dbqqdrbj0qkon.apps.googleusercontent.com",
+    "googleClientSecret" :"r85ACzEY9GROCPruDh6RpSl7",
+    "callbackURL":"/auth/google/callback"
+  }
+}
