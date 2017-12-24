@@ -12,6 +12,33 @@ export function fetchUser() {
     };
 }
 
+export function saveProject(values, callback) {
+    const request = axios.post(`/api/save_project`, values).then(() => callback());
+
+    return {
+        type: types.SAVE_PROJECT,
+        payload:request
+    };
+}
+
+export function fetchProject(id ) {
+    const request = axios.get(`/api/get_project/${id}`);
+
+    return {
+        type: types.FETCH_PROJECT,
+        payload:request
+    };
+}
+
+
+export function fetchProjects( ) {
+    const request = axios.get(`/api/get_projects`);
+
+    return {
+        type: types.FETCH_PROJECTS,
+        payload:request
+    };
+}
 
 // export const fetchUser = () => async dispatch =>{
 //         const res = await axios.get('/api/current_user');

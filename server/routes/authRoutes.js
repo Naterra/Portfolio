@@ -25,7 +25,7 @@ router.get('/logout', (req, res) =>{
 
 
 router.get('/current_user', (req, res) =>{
-    console.log('USER', req.user);
+    //console.log('USER', req.user);
     res.send(req.user);
 });
 

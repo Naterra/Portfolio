@@ -7,13 +7,13 @@ import { saveProject, fetchProject } from "../../actions";
 import { Field, reduxForm } from "redux-form";
 
 // Fields
-import formFields from "./formFields";
+import formFields from "./projectFormFields";
 import formFieldsTempl from "./formFieldTempl";
 
-class UserForm extends Component {
+class ProjectForm extends Component {
     formSubmit(values) {
-        this.props.saveContact(values, () => {
-            this.props.userCreatedCallback(values);
+        this.props.saveProject(values, () => {
+            this.props.formSubmittedCallback(values);
         });
     }
 
@@ -40,25 +40,11 @@ class UserForm extends Component {
                     onSubmit={handleSubmit(this.formSubmit.bind(this))}
                 >
                     <div className="row">
-                        <div className="col s6"> {this.renderFields(formFields.pers)}</div>
-                        <div className="col s6">
-                            {this.renderFields(formFields.address)}
-                        </div>
+                        <div className="col s12"> {this.renderFields(formFields)}</div>
                     </div>
 
-                    <br />
-                    <div className="row">
-                        <div className="col s12">
-                            {" "}
-                            {this.renderFields(formFields.contact)}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col s12">
-                            {" "}
-                            {this.renderFields(formFields.other)}
-                        </div>
-                    </div>
+
+
 
                     <button type="submit" className="teal btn-flat right white-text">
                         Save
@@ -83,8 +69,8 @@ function mapStateToProps({ selected_contact }) {
 function validate(values) {
     const errors = {};
 
-    let all_fields = [].concat(formFields.pers, formFields.contact);
-    let required_fields = all_fields.filter(elem => {
+    //Find all required fields
+    let required_fields = formFields.filter(elem => {
         return elem.reguired === true;
     });
 
@@ -98,11 +84,11 @@ function validate(values) {
     return errors;
 }
 
-export default connect(mapStateToProps, { fetchContact, saveContact })(
+export default connect(mapStateToProps, { fetchProject, saveProject })(
     reduxForm({
-        form: "NewUserForm",
+        form: "ProjectForm",
         validate: validate,
         enableReinitialize: false,
         keepDirtyOnReinitialize: false
-    })(UserForm)
+    })(ProjectForm)
 );
