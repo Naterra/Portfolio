@@ -2,6 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 const cookieSession = require('cookie-session');
 import cors from 'cors';
+import multer from 'multer';
+
 import * as db from './db/db';
 import { serverPort, cookieKey } from '../config/config.json';
 
@@ -22,6 +24,12 @@ app.use(
         keys:[cookieKey]
     }));
 
+// app.use(
+//     multer({ dest: './uploads/',
+//     rename: function (fieldname, filename) {
+//         return filename;
+//     },
+// }));
 
 // Set up connection of database
 db.setUpConnection();
@@ -44,9 +52,11 @@ app.set('port', process.env.PORT || serverPort);
 // Routers
 import api_routes  from './routes/api' ;
 import auth_routes from './routes/authRoutes' ;
+//import files_routes from './routes/filesRoutes' ;
 
 app.use('/api', api_routes);
 app.use('/auth', auth_routes);
+//app.use('/files', files_routes);
 
 if (process.env.NODE_ENV === 'production') {
     // Express will serve up production assets

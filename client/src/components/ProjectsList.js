@@ -30,7 +30,7 @@ class ProjectsList extends Component{
 
                 return this.props.projects.map((item) =>{
                     return (
-                        <ProjectItem key={item.name} project={item}/>
+                        <ProjectItem key={item._id} project={item}/>
                     );
                 });
             }else{

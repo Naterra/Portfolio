@@ -13,7 +13,12 @@ export function fetchUser() {
 }
 
 export function saveProject(values, callback) {
-    const request = axios.post(`/api/save_project`, values).then(() => callback());
+    console.log('ACTION: saveProject', values);
+
+    //values.myfile = values.file[0];
+    const config = { headers: { 'content-type': 'multipart/form-data' } };
+
+    const request = axios.post(`/api/save_project`, values, config).then(() => callback());
 
     return {
         type: types.SAVE_PROJECT,

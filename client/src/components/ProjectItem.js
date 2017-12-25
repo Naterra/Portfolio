@@ -28,7 +28,7 @@ class ProjectItem extends Component{
 
                 <div className="card">
                     <div className="card-image">
-                        <img src={project.img} />
+                        <img src={project.cloudinary_img} />
                             <span className="card-title">{project.name}</span>
                     </div>
                     <div className="card-content">

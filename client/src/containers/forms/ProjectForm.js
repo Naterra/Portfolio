@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import _ from 'lodash';
+import axios from 'axios';
 import validateEmails from "../../utils/validateEmails";
 // Redux
 import { connect } from "react-redux";
@@ -8,14 +9,49 @@ import { Field, reduxForm } from "redux-form";
 
 // Fields
 import formFields from "./projectFormFields";
+//import FileInput from "./FileInput";
 import formFieldsTempl from "./formFieldTempl";
+
+
+// const customFileInput = (field) => {
+//    // delete field.input.value; // <-- just delete the value property
+//     const {fields: {avatar}} = this.props;
+//
+//     return <input type="file" id="file" {...field.input} />;
+// };
+
+const UploadFile = ({ input: {value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
+    <input type='file' {...inputProps} {...props} />
+);
+
 
 class ProjectForm extends Component {
     formSubmit(values) {
-        this.props.saveProject(values, () => {
-            this.props.formSubmittedCallback(values);
+        console.log('FORM val', values);
+        //
+        //
+         const data = new FormData(values);
+            data.append('file', values.file[0]);
+            data.append('name', 'some value user types');
+        //
+        //
+        console.log('DATA', data);
+
+        this.props.saveProject(data, () => {
+            this.props.formSubmittedCallback(data);
         });
     }
+
+    // handleUploadFile (event) {
+    //     const data = new FormData();
+    //     data.append('file', event.target.files[0]);
+    //     data.append('name', 'some value user types');
+    //     data.append('description', 'some value user types');
+    //     // '/files' is your node.js route that triggers our middleware
+    //     axios.post('/api/files', data).then((response) => {
+    //         console.log(response); // do something with the response
+    //     });
+    // }
 
     renderFields(array = []) {
         return array.map(field => {
@@ -30,6 +66,7 @@ class ProjectForm extends Component {
             );
         });
     }
+
     renderContent() {
         const { handleSubmit } = this.props;
 
@@ -45,6 +82,11 @@ class ProjectForm extends Component {
 
 
 
+                    <Field
+                        name='file'
+                        accept='.jpg'
+                        component={UploadFile}
+                    />
 
                     <button type="submit" className="teal btn-flat right white-text">
                         Save
