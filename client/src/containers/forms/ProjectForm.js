@@ -27,15 +27,18 @@ const UploadFile = ({ input: {value: omitValue, ...inputProps }, meta: omitMeta,
 
 class ProjectForm extends Component {
     formSubmit(values) {
-        console.log('FORM val', values);
+        //console.log('FORM val', values);
         //
         //
-         const data = new FormData(values);
-            data.append('file', values.file[0]);
-            data.append('name', 'some value user types');
-        //
-        //
-        console.log('DATA', data);
+         const data = new FormData();
+         data.append('file', values.file[0]);
+         data.append('name', values.name);
+         data.append('description', values.descr);
+         data.append('demo_url', values.demo_url);
+         data.append('github_url', values.github_url);
+        //values.file = values.file[0];
+
+        console.log('FORM data', data);
 
         this.props.saveProject(data, () => {
             this.props.formSubmittedCallback(data);

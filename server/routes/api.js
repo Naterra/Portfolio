@@ -4,7 +4,7 @@ const router = express.Router();
 import axios from 'axios';
 import multer from 'multer';
 import cloudinary from 'cloudinary';
-import fileUploadMiddleware from '../services/fileUploadMiddleware';
+
 
 import fs from 'fs';
 
@@ -20,33 +20,7 @@ cloudinary.config({
 });
 
 
- // const uploadCloudinary =(formData)=>{
- //     console.log('_ _ _ _uploadCloudinary fn _ _ _',formData);
- //
- //
- //     // Make an AJAX upload request using Axios (replace Cloudinary URL below with your own)
- //     return axios.post("https://api.cloudinary://818861535714572:x1-zgZIok662mQiLibcnGypcfIw@naterra16/", formData, {
- //         headers: { "X-Requested-With": "XMLHttpRequest" },
- //     }).then(response => {
- //         const data = response.data;
- //         const fileURL = data.secure_url; // You should store this URL for future references in your app
- //         console.log('_ _ _ _ Cloudinary RESP:  _ _ _', data);
- //     });
- //
- // };
 
-function uploadCl(file){
-    console.log('_ _ _ uploadCl fn _ _ _',file);
-
-    cloudinary.uploader.upload_stream((result) => {
-
-        }).end(req.file.buffer);
-
-    // cloudinary.v2.uploader.upload(file,
-    //     function(result){
-    //     console.log("___result__", result)
-    // });
-}
 
 
 router.get('/', (req, res, next) => {
@@ -60,39 +34,14 @@ router.get('/test', (req, res) => {
     res.send('OK');
 });
 
+
 router.get('/get_projects', (req, res) => {
-    Project.find( {},(err, data) => {
-    //Project.find( {}).lean().exec((err, data) => {
+    Project.find( {},null, {sort: {_id: -1}},(err, data) => {
         if(err){
             console.log(err, 'err');
             res.send(err);
         }
-
-        const new_data=[];
-        //console.log('DATA +++', data);
-        //const  projects = data.toObject(); //turns it into JSON YAY!
-
-        data.forEach((val,index) =>{
-            //console.log(val, 'VAL');
-            //console.log(index );
-const new_item = {
-
-}
-            if( typeof val.img.data !== "undefined"){
-                const thumb = new Buffer(val.img.data).toString('base64');
-                 //console.log("++DATA++", val.img.data  );
-                //console.log("THUMB___", thumb  );
-            }
-
-            //console.log("++ VAL ______" , val );
-            new_data.push(val);
-        });
-
-        //console.log('NEW++', new_data);
-        //data.thumb = new Buffer(data.img.data).toString('base64');
-
-        res.send(new_data);
-        //console.log(data, 'data');
+        res.send(data);
     });
 
 
@@ -104,7 +53,7 @@ var uploads = multer({
 
 router.post('/save_project', uploads.single('file'), (req, res) => {
     const id = req.body._id ;
-    console.log("file +++", req.body);
+    console.log("__REG_BODY__", req.body);
     //console.log("___uploads___", uploads );
 
     const file = fs.readFileSync(req.file.path);
@@ -116,11 +65,8 @@ router.post('/save_project', uploads.single('file'), (req, res) => {
     };
 
 
-     console.log("___FPATH___", req.file.path );
+     //console.log("___FPATH___", req.file.path );
 
-    // cloudinary.uploader.upload_stream((result) => {
-    //
-    // }).end(req.file.buffer);
 
 
 
@@ -156,6 +102,7 @@ router.post('/save_project', uploads.single('file'), (req, res) => {
                     github_url: req.body.github_url
                 }).save();
 
+                res.send({request:req.body});
             });
 
     }

@@ -30,6 +30,7 @@ class ProjectsList extends Component{
 
                 return this.props.projects.map((item) =>{
                     return (
+
                         <ProjectItem key={item._id} project={item}/>
                     );
                 });
@@ -50,7 +51,7 @@ class ProjectsList extends Component{
         console.log('ProjectsList: render');
         console.warn('this.props', this.props);
            return(
-                <div>
+                <div className="row">
                     { this.renderList() }
                 </div>
 
