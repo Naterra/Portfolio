@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import _ from 'lodash';
-import axios from 'axios';
+
 import validateEmails from "../../utils/validateEmails";
 // Redux
 import { connect } from "react-redux";

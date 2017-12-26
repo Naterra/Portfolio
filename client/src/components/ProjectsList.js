@@ -1,15 +1,20 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
 
-import { fetchProjects } from '../actions';
+import { fetchProjects, delete_project } from '../actions';
 import ProjectItem from './ProjectItem';
 
 
 
 class ProjectsList extends Component{
+    constructor(props){
+        super(props);
+        this.delete_project = this.delete_project.bind(this);
+    }
     componentDidMount(){
         console.log('ProjectsList: componentDidMount');
         this.props.fetchProjects();
+
     }
     componentWillReceiveProps(nextProps){
         console.log('ProjectsList: componentWillReceiveProps');
@@ -23,7 +28,10 @@ class ProjectsList extends Component{
     componentDidUpdate(prevProps, prevState){
         console.log('ProjectsList: componentDidUpdate');
     }
-
+    delete_project(id){
+        console.log('delete_project', id  );
+        this.props.delete_project(id);
+    }
     renderList(){
         if (this.props.projects && this.props.projects.length > 0) {
                 console.log("LENGTH", this.props.projects.length);
@@ -31,7 +39,7 @@ class ProjectsList extends Component{
                 return this.props.projects.map((item) =>{
                     return (
 
-                        <ProjectItem key={item._id} project={item}/>
+                        <ProjectItem  delete_project={this.delete_project} key={item._id} project={item}/>
                     );
                 });
             }else{
@@ -65,4 +73,4 @@ class ProjectsList extends Component{
 function mapStateToProps({projects}){
     return {projects};
 }
-export default connect(mapStateToProps, {fetchProjects})(ProjectsList);
+export default connect(mapStateToProps, {fetchProjects, delete_project})(ProjectsList);

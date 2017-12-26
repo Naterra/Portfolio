@@ -26,6 +26,17 @@ export function saveProject(values, callback) {
     };
 }
 
+export function delete_project(id){
+    console.log('delete_project action', id);
+    const config = { headers: { 'content-type': 'application/json' } };
+    const request = axios.post('/api/delete_project', {id:id}, config);
+
+    return {
+        type: types.DELETE_PROJECT,
+        id:id
+    };
+}
+
 export function fetchProject(id ) {
     const request = axios.get(`/api/get_project/${id}`);
 

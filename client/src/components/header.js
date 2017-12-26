@@ -14,7 +14,7 @@ class Header extends Component {
 				<div className="row">
 					<div className="parallax-container">
 						<div className="parallax">
-							<img src={img} />
+							<img alt="parallax" src={img} />
 						</div>
 					</div>
 				</div>

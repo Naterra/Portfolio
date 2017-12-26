@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Dropdown,NavItem} from 'react-materialize';
+import { Dropdown,NavItem} from 'react-materialize';
 
 class UserWidgets extends Component {
 
@@ -18,7 +18,7 @@ class UserWidgets extends Component {
 						</Dropdown>
 					</li>
 					<li>
-						<img className="circle" style={{ height: '50px', verticalAlign: 'middle' }} src={this.props.auth.image} />
+						<img  alt="" className="circle" style={{ height: '50px', verticalAlign: 'middle' }} src={this.props.auth.image} />
 					</li>
 				</ul>
 

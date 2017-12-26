@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, Modal, Icon} from 'react-materialize'
+import {  Modal } from 'react-materialize'
 import ProjectForm from "./forms/ProjectForm";
 
 class ProjectModalForm extends Component{

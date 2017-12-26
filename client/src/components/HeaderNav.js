@@ -26,7 +26,7 @@ class HeaderNav extends Component {
 				<div className="nav-wrapper">
 					<div className="left" style={{ marginLeft: '55px' }}>
 						<a>
-							<img className="App-logo" src={logo} />
+							<img alt="logo" className="App-logo" src={logo} />
 						</a>
 					</div>
 

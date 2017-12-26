@@ -48,7 +48,17 @@ router.get('/get_projects', (req, res) => {
 });
 
 var uploads = multer({
-    dest: 'public/uploads/'
+    dest: './uploads/'
+});
+
+router.post('/delete_project', (req, res) => {
+    const id = req.body.id ;
+
+    Project.findByIdAndRemove({
+        _id: id
+    }, function (err, project) {
+         //console.log('project', project);
+    });
 });
 
 router.post('/save_project', uploads.single('file'), (req, res) => {
@@ -66,11 +76,6 @@ router.post('/save_project', uploads.single('file'), (req, res) => {
 
 
      //console.log("___FPATH___", req.file.path );
-
-
-
-
-
 
 
     // Find and update or create new item
