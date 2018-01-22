@@ -1,7 +1,7 @@
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth20';
 GoogleStrategy.Strategy;
-import { googleAuth } from '../../config/config.json';
+import config from '../../config/config.js';
 import mongoose from 'mongoose';
 
 //Pull out User data out of mongoose
@@ -22,26 +22,32 @@ passport.deserializeUser((id, done) => {
 passport.use(
 	new GoogleStrategy(
 		{
-			clientID: googleAuth.googleClientId,
-			clientSecret: googleAuth.googleClientSecret,
-			callbackURL: googleAuth.callbackURL,
+			clientID: config.googleAuth.googleClientId,
+			clientSecret: config.googleAuth.googleClientSecret,
+			callbackURL: config.googleAuth.callbackURL,
 			proxy: true
 		},
 		async (accessToken, refreshToken, profile, done) => {
 			const existingUser = await User.findOne({ googleId: profile.id });
-			//console.log('GOOGLE Prof', profile);
-			//console.log('GOOGLE photo', profile._json);
+
 			if (existingUser) {
 				done(null, existingUser);
 			} else {
-				const user = await new User({
-					googleId: profile.id,
-					name: profile.displayName,
-					email: profile._json.emails[0].value,
-					gender: profile.gender,
-					image: profile._json.image.url
-				}).save();
-				done(null, user);
+                const records = await User.count();
+                if(records>=1){
+                	//Do not create a new user, because this App is a single user App
+                    done(null, false, {message: "App User already exists"});
+				}else{
+                    const user = await new User({
+                        googleId: profile.id,
+                        name: profile.displayName,
+                        email: profile._json.emails[0].value,
+                        gender: profile.gender,
+                        image: profile._json.image.url
+                    }).save();
+                    done(null, user);
+				}
+
 			}
 		}
 	)

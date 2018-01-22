@@ -9,7 +9,7 @@ class Header extends Component {
 	render() {
 		return (
 			<header className="">
-				<HeaderNav auth={this.props} />
+				<HeaderNav auth={this.props.auth} />
 
 				<div className="row">
 					<div className="parallax-container">

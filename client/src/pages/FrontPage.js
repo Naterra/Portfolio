@@ -3,6 +3,11 @@ import Header from '../components/header';
 
 
 class FrontPage extends Component {
+	componentWillMount(){
+		// Check if admin user was registered
+
+	}
+
 	render() {
 		return (
 			<div>

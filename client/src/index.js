@@ -11,6 +11,7 @@ import reducers from "./reducers";
 
 import './index.css';
 import App from './pages/App';
+
 const store = createStore(
     reducers,
     composeWithDevTools(

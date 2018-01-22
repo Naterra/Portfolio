@@ -4,7 +4,7 @@ import * as types  from './types';
 //Action Creator
 
 export function fetchUser() {
-    const request = axios.get(`/auth/current_user`);
+    const request = axios.get(`/auth/fetch_user`);
 
     return {
         type: types.FETCH_USER,
