@@ -3,8 +3,6 @@ import passport from 'passport';
 import express from 'express';
 const router = express.Router();
 
-import auth_rules from '../middlewares/auth_rules';
-import appSetUp from '../middlewares/app_setup';
 
 
 router.get('/google',
@@ -14,12 +12,6 @@ router.get('/google',
     })
 );
 
-// router.get('/google_signup',
-//     passport.authenticate('google',{
-//         scope: ['profile', 'email'],
-//         prompt: 'select_account'
-//     })
-// );
 
 router.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/user_exist' }),
