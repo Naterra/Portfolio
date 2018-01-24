@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import ProjectManagingLinks from './ProjectManagingLinks';
 
-import { findDOMNode } from "react-dom";
-import $ from "jquery";
-import {  Modal, Button } from 'react-materialize';
-
 
 class ProjectItem extends Component {
 	constructor(props) {
@@ -32,12 +28,8 @@ class ProjectItem extends Component {
 
     edit_project(){
         console.log('edit_project' );
-        // this.$el = $('#project_form');
-        //const el = findDOMNode(this.refs.toggle);
-        const modalRoot = document.getElementById('project_form');
-
-        $(modalRoot).modal('open');
     }
+
 	onMouseEnter() {
 		//console.log('onMouseEnter', this.managingLinks);
 		if(this.props.editable){
@@ -62,8 +54,8 @@ class ProjectItem extends Component {
 					{this.props.editable &&
 					<ProjectManagingLinks
 						project={project}
-                        deleteEvent={this.props.delete_project}
-                        editEvent={this.edit_project}
+						delete_project={this.props.delete_project}
+						edit_project={this.edit_project}
 						inputRef={elem => {	this.managingLinks = elem;}}
 					/>}
 

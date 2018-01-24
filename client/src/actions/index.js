@@ -12,6 +12,14 @@ export function fetchUser() {
     };
 }
 
+
+export function select_project(id) {
+    return {
+        type: types.SELECT_PROJECT,
+        payload:id
+    };
+}
+
 export function saveProject(values, callback) {
     console.log('ACTION: saveProject', values);
 

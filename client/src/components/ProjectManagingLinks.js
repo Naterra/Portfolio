@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ProjectModalForm from '../containers/ProjectModalForm';
-
+// import { connect } from 'react-redux';
 
 class ProjectManagingLinks extends Component{
     render(){
@@ -12,7 +12,7 @@ class ProjectManagingLinks extends Component{
                     <i className="large material-icons">settings</i>
                 </a>
                 <ul>
-                    <li><a onClick={()=>{this.props.deleteEvent(this.props.project._id)} } className="btn-floating red"><i className="material-icons">delete</i></a></li>
+                    <li><a onClick={()=>{this.props.delete_project(this.props.project._id)} } className="btn-floating red"><i className="material-icons">delete</i></a></li>
                     <li><ProjectModalForm
                         name="ProjectEditModal"
                         title="Edit Project"

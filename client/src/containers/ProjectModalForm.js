@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {  Modal } from 'react-materialize';
 import ProjectForm from "./forms/ProjectForm";
 
+import { connect } from 'react-redux';
+import { select_project } from '../actions';
+
 class ProjectModalForm extends Component{
     constructor(props) {
         super(props);
@@ -41,7 +44,18 @@ class ProjectModalForm extends Component{
                 header={this.state.modal_header}
                 trigger={<a className={trigger_cl}>
                     <i className="large material-icons">mode_edit</i>
-                </a>}>
+                </a>}
+                modalOptions={{
+                    complete: () => {
+                        // this.setToDefault();
+                    },
+                    ready: (modal, trigger) => {
+                        // this.setToDefault();
+                        const project = this.props.project || null;
+                        this.props.select_project(project);
+                        //console.log('Modal open make selectable project '+this.props.project.name);
+                    }
+                }}>
 
                 <div className="row">
 
@@ -63,4 +77,5 @@ class ProjectModalForm extends Component{
     }
 }
 
-export default ProjectModalForm;
+
+export default connect(null, {select_project})(ProjectModalForm);
