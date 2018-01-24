@@ -4,7 +4,8 @@ import { Dropdown,NavItem} from 'react-materialize';
 class UserWidgets extends Component {
 
     render() {
-	    console.log(this.props, 'ppp');
+	    console.log( 'UserWidgets:render');
+	    //console.log(this.props, 'ppp');
 		return (
 				<ul id="nav-mobile" className=" hide-on-med-and-down" style={{display: 'inline-block'}}>
 					<li >

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import ProjectManagingLinks from './ProjectManagingLinks';
 
+import { findDOMNode } from "react-dom";
+import $ from "jquery";
+import {  Modal, Button } from 'react-materialize';
+
 
 class ProjectItem extends Component {
 	constructor(props) {
@@ -28,30 +32,43 @@ class ProjectItem extends Component {
 
     edit_project(){
         console.log('edit_project' );
+        // this.$el = $('#project_form');
+        //const el = findDOMNode(this.refs.toggle);
+        const modalRoot = document.getElementById('project_form');
+
+        $(modalRoot).modal('open');
     }
 	onMouseEnter() {
 		//console.log('onMouseEnter', this.managingLinks);
-		this.managingLinks.style.visibility = 'visible';
+		if(this.props.editable){
+            this.managingLinks.style.visibility = 'visible';
+		}
+
 	}
     onMouseLeave(){
         //console.log('onMouseLeave', this.managingLinks);
-        this.managingLinks.style.visibility = 'hidden';
+        if(this.props.editable) {
+            this.managingLinks.style.visibility = 'hidden';
+        }
     }
 	render() {
 		let project = this.props.project;
-		//console.log('PROJECT', project);
+		// console.log('editable', this.props.editable);
+		console.log('ProjectItem: render' );
 
 		return (
 			<div onMouseEnter={this.onMouseEnter}  onMouseLeave={this.onMouseLeave} className="col  s12 m6 l4">
 				<div className="card">
+					{this.props.editable &&
 					<ProjectManagingLinks
-                         id={project._id}
+						project={project}
                         deleteEvent={this.props.delete_project}
                         editEvent={this.edit_project}
-						inputRef={elem => {
-							this.managingLinks = elem;
-						}}
-					/>
+						inputRef={elem => {	this.managingLinks = elem;}}
+					/>}
+
+
+
 
 					<div className="card-image">
 						<img alt="" src={project.cloudinary_img} />

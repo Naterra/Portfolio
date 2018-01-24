@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../components/header';
-
+import ProjectsList from '../components/ProjectsList';
 
 class FrontPage extends Component {
 	componentWillMount(){
@@ -13,8 +13,8 @@ class FrontPage extends Component {
 			<div>
 				<Header />
 				<div className="container">
-					<h1 className="center">Welcome to my React Projects Page</h1>
-					<h1>Welcome on front page</h1>
+					<h4 className="center">Welcome to my React Projects Page</h4>
+					<ProjectsList editable={false}/>
 				</div>
 			</div>
 		);

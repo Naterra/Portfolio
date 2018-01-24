@@ -21,7 +21,7 @@ class AdminProjectsPage extends Component {
                 <div className="row">
                     <ProjectModalForm />
                 </div>
-                <ProjectsList />
+                <ProjectsList editable={true} />
 
                 </div>
 
