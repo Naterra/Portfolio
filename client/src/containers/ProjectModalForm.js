@@ -3,7 +3,7 @@ import {  Modal } from 'react-materialize';
 import ProjectForm from "./forms/ProjectForm";
 
 import { connect } from 'react-redux';
-import { select_project } from '../actions';
+import { select_project, fetchProjects } from '../actions';
 
 class ProjectModalForm extends Component{
     constructor(props) {
@@ -23,6 +23,8 @@ class ProjectModalForm extends Component{
 
     formSubmittedCallback(){
         this.setState({ project_created: true, modal_header: "" });
+        // re-fetch list of projects
+        this.props.fetchProjects();
     }
 
     setToDefault() {
@@ -47,13 +49,11 @@ class ProjectModalForm extends Component{
                 </a>}
                 modalOptions={{
                     complete: () => {
-                        // this.setToDefault();
+                        this.setToDefault();
                     },
                     ready: (modal, trigger) => {
-                        // this.setToDefault();
                         const project = this.props.project || null;
                         this.props.select_project(project);
-                        //console.log('Modal open make selectable project '+this.props.project.name);
                     }
                 }}>
 
@@ -70,7 +70,6 @@ class ProjectModalForm extends Component{
                                 <h5 className=" center teal-text" style={{marginLeft:'15px'}}>  New Project was created </h5>
                             </div>
                     )}
-
                 </div>
             </Modal>
         )
@@ -78,4 +77,4 @@ class ProjectModalForm extends Component{
 }
 
 
-export default connect(null, {select_project})(ProjectModalForm);
+export default connect(null, {select_project, fetchProjects})(ProjectModalForm);

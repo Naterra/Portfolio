@@ -13,10 +13,10 @@ export function fetchUser() {
 }
 
 
-export function select_project(id) {
+export function select_project(project) {
     return {
         type: types.SELECT_PROJECT,
-        payload:id
+        payload:project
     };
 }
 

@@ -12,12 +12,6 @@ import formFields from './projectFormFields';
 //import FileInput from "./FileInput";
 import formFieldsTempl from './formFieldTempl';
 
-// const customFileInput = (field) => {
-//    // delete field.input.value; // <-- just delete the value property
-//     const {fields: {avatar}} = this.props;
-//
-//     return <input type="file" id="file" {...field.input} />;
-// };
 
 const UploadFile = ({ input: { value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
 	<input type="file" {...inputProps} {...props} />
@@ -67,6 +61,27 @@ class ProjectForm extends Component {
 		});
 	}
 
+    image_field(){
+         const isMyObjectEmpty = this.props.initialValues ? !Object.keys(this.props.initialValues).length : true ;
+
+
+        if( !isMyObjectEmpty &&
+            typeof this.props.initialValues.cloudinary_img !== null &&
+            this.props.initialValues.cloudinary_img.length>0 ){
+            //console.log('++ cloudinary_img length',   this.props.initialValues.cloudinary_img.length);
+            return(
+                <div className="row">
+                    <img className="responsive-img" src={this.props.initialValues.cloudinary_img} />
+                </div>
+            )
+        }else{
+            return(
+                <Field name="file" accept=".jpg" component={UploadFile} />
+            )
+        }
+
+    }
+
 	renderContent() {
 		const { handleSubmit } = this.props;
 
@@ -77,7 +92,8 @@ class ProjectForm extends Component {
 						<div className="col s12"> {this.renderFields(formFields)}</div>
 					</div>
 
-					<Field name="file" accept=".jpg" component={UploadFile} />
+                    {this.image_field()}
+
 
 					<button type="submit" className="teal btn-flat right white-text">
 						Save

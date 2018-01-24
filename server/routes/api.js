@@ -58,6 +58,7 @@ router.post('/delete_project', (req, res) => {
         _id: id
     }, function (err, project) {
          //console.log('project', project);
+        res.send({status:'ok'});
     });
 });
 
@@ -107,7 +108,7 @@ router.post('/save_project', uploads.single('file'), (req, res) => {
                     github_url: req.body.github_url
                 }).save();
 
-                res.send({request:req.body});
+                res.send( req.body );
             });
 
     }
