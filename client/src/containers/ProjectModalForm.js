@@ -11,7 +11,7 @@ class ProjectModalForm extends Component{
 
         this.default_param = {
             project_created: false,
-            modal_header: this.props.title ? this.props.title : "Add New Project 4"
+            modal_header: this.props.title ? this.props.title : "Add New Project"
         };
 
         console.log("ProjectModalForm: constructor", this.default_param );

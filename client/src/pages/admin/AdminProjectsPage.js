@@ -19,8 +19,11 @@ class AdminProjectsPage extends Component {
                     <h4 className="left-align">Projects</h4>
 
                 <div className="row">
-                    <ProjectModalForm />
+                    <div className="right">
+                        <ProjectModalForm />
+                    </div>
                 </div>
+
                 <ProjectsList editable={true} />
 
                 </div>

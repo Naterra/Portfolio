@@ -9,20 +9,44 @@ import { Field, reduxForm } from 'redux-form';
 
 // Fields
 import formFields from './projectFormFields';
-//import FileInput from "./FileInput";
 import formFieldsTempl from './formFieldTempl';
 
 
-const UploadFile = ({ input: { value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
-	<input type="file" {...inputProps} {...props} />
-);
+
+import AvatarEditor from 'react-avatar-editor';
+
+// const UploadFile = ({ input: { value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
+// 	<input type="file" {...inputProps} {...props} />
+// );
 
 class ProjectForm extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			allowZoomOut: false,
+			position: { x: 0.5, y: 0.5 },
+			scale: 1,
+			rotate: 0,
+			borderRadius: 0,
+			preview: null,
+			width: 200,
+			height: 200
+		};
+	}
+
 	formSubmit(values) {
 		//console.log('FORM val', values);
 
 		const data = new FormData();
-		data.append('file', values.file[0]);
+		// if(values.file){
+		//     data.append('file', values.file[0]);
+		// }
+
+		//Avatar crop
+		//data.append('file', this.state.image);
+		data.append('file', this.state.preview.img);
+
 		data.append('name', values.name);
 		data.append('description', values.descr);
 		data.append('demo_url', values.demo_url);
@@ -61,26 +85,79 @@ class ProjectForm extends Component {
 		});
 	}
 
-    image_field(){
-         const isMyObjectEmpty = this.props.initialValues ? !Object.keys(this.props.initialValues).length : true ;
+	// image_field(){
+	//      const isMyObjectEmpty = this.props.initialValues ? !Object.keys(this.props.initialValues).length : true ;
+	//
+	//
+	//     if( !isMyObjectEmpty &&
+	//         typeof this.props.initialValues.cloudinary_img !== null &&
+	//         this.props.initialValues.cloudinary_img.length>0 ){
+	//         //console.log('++ cloudinary_img length',   this.props.initialValues.cloudinary_img.length);
+	//         return(
+	//             <div className="row">
+	//                 <img className="responsive-img" src={this.props.initialValues.cloudinary_img} />
+	//             </div>
+	//         )
+	//     }else{
+	//         return(
+	//             <Field name="file" accept=".jpg" component={UploadFile} />
+	//         )
+	//     }
+	//
+	// }
+	//for img crop
+	handleSave = data => {
+		const img = this.editor.getImageScaledToCanvas().toDataURL();
+		const rect = this.editor.getCroppingRect();
 
+		this.setState({
+			preview: {
+				img,
+				rect,
+				scale: this.state.scale,
+				width: this.state.width,
+				height: this.state.height,
+				borderRadius: this.state.borderRadius
+			}
+		});
+	};
+	handleNewImage = e => {
+		this.setState({ image: e.target.files[0] });
+		 this.handleSave();
+	};
+	//for img crop
+	setEditorRef = editor => {
+		if (editor) this.editor = editor;
+	};
+	image_crop_field() {
+		return (
+			<div>
+				<AvatarEditor
+					ref={this.setEditorRef}
+					image={this.state.image || '../../../../public/cat.jpg'}
+					width={450}
+					height={250}
+					border={50}
+					color={[255, 255, 255, 0.6]} // RGBA
+					scale={1}
+					rotate={0}
+				/>
+				<input name="newImage" type="file" onChange={this.handleNewImage} />
 
-        if( !isMyObjectEmpty &&
-            typeof this.props.initialValues.cloudinary_img !== null &&
-            this.props.initialValues.cloudinary_img.length>0 ){
-            //console.log('++ cloudinary_img length',   this.props.initialValues.cloudinary_img.length);
-            return(
-                <div className="row">
-                    <img className="responsive-img" src={this.props.initialValues.cloudinary_img} />
-                </div>
-            )
-        }else{
-            return(
-                <Field name="file" accept=".jpg" component={UploadFile} />
-            )
-        }
-
-    }
+				<input type="button" onClick={this.handleSave} value="Preview" />
+				<br />
+				{!!this.state.preview && (
+					<img
+						src={this.state.preview.img}
+						style={{
+							borderRadius: `${(Math.min(this.state.preview.height, this.state.preview.width) + 10) *
+								(this.state.preview.borderRadius / 2 / 100)}px`
+						}}
+					/>
+				)}
+			</div>
+		);
+	}
 
 	renderContent() {
 		const { handleSubmit } = this.props;
@@ -91,9 +168,7 @@ class ProjectForm extends Component {
 					<div className="row">
 						<div className="col s12"> {this.renderFields(formFields)}</div>
 					</div>
-
-                    {this.image_field()}
-
+					{this.image_crop_field()}
 
 					<button type="submit" className="teal btn-flat right white-text">
 						Save
@@ -139,6 +214,6 @@ export default connect(mapStateToProps, { fetchProject, saveProject })(
 		validate: validate,
 		enableReinitialize: true,
 		keepDirtyOnReinitialize: false,
-        destroyOnUnmount: true
+		destroyOnUnmount: true
 	})(ProjectForm)
 );

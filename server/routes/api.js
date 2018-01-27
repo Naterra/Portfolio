@@ -64,22 +64,21 @@ router.post('/delete_project', (req, res) => {
 
 router.post('/save_project', uploads.single('file'), (req, res) => {
     const id = req.body._id ;
-    console.log("__REG_BODY__", req.body);
-    //console.log("___uploads___", uploads );
 
-    const file = fs.readFileSync(req.file.path);
-    //console.log("___file___", file );
+    //File Uploading
+    if(req.file){
+        // const file = fs.readFileSync(req.file.path);
+        // const img = {
+        //     data:fs.readFileSync(req.file.path),
+        //     contentType: 'image/png'
+        // };
+    }
 
-    const img = {
-        data:fs.readFileSync(req.file.path),
-        contentType: 'image/png'
-    };
 
-
-     //console.log("___FPATH___", req.file.path );
 
 
     // Find and update or create new item
+    // Update Project
     if(id>=0){
         Project.findOneAndUpdate({_id: id}, req.body,  (err, data) => {
             if(err){
@@ -90,13 +89,21 @@ router.post('/save_project', uploads.single('file'), (req, res) => {
             console.log(data, 'data');
         });
     }
-    // Create New
+
+    // Create New Project
     else{
 
-        cloudinary.v2.uploader.upload(req.file.path,
+        //req.file.path
+        //Data URI up to 60MB
+        cloudinary.v2.uploader.upload(req.body.file,
             function(error, result) {
-                console.log(result)
-                console.log('___CL____', result);
+                // console.log(result)
+                // console.log('___CL____', result);
+                if(error){
+                    res.send({err:error});
+                }
+
+
                let secure_url = result.url;
 
                 new Project({
@@ -110,7 +117,6 @@ router.post('/save_project', uploads.single('file'), (req, res) => {
 
                 res.send( req.body );
             });
-
     }
 
 });
