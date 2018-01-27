@@ -9,6 +9,6 @@ export default ({ input, label, type, meta: { touched, error, warning } }) => (
             ((error && <span>{error}</span>) ||
                 (warning && <span>{warning}</span>))}
         </div>
-        <input {...input} placeholder={label} />
+        <input {...input} type={type } placeholder={label} />
     </div>
 );

@@ -11,13 +11,20 @@ import { Field, reduxForm } from 'redux-form';
 import formFields from './projectFormFields';
 import formFieldsTempl from './formFieldTempl';
 
-
-
 import AvatarEditor from 'react-avatar-editor';
 
 // const UploadFile = ({ input: { value: omitValue, ...inputProps }, meta: omitMeta, ...props }) => (
 // 	<input type="file" {...inputProps} {...props} />
 // );
+
+const TextAreaField = ({ input, label, meta: omitMeta, ...props }) => (
+	<div className="row">
+		<div className="input-field">
+			<label>{label}</label>
+			<textarea {...input} id="textarea1" className="materialize-textarea" {...props} rows="10" cols="40" />
+		</div>
+	</div>
+);
 
 class ProjectForm extends Component {
 	constructor(props) {
@@ -45,8 +52,10 @@ class ProjectForm extends Component {
 
 		//Avatar crop
 		//data.append('file', this.state.image);
-		data.append('file', this.state.preview.img);
-
+		if (this.state.preview) {
+			data.append('file', this.state.preview.img);
+		}
+		data.append('_id', values._id);
 		data.append('name', values.name);
 		data.append('description', values.descr);
 		data.append('demo_url', values.demo_url);
@@ -123,40 +132,52 @@ class ProjectForm extends Component {
 	};
 	handleNewImage = e => {
 		this.setState({ image: e.target.files[0] });
-		 this.handleSave();
+		this.handleSave();
 	};
 	//for img crop
 	setEditorRef = editor => {
 		if (editor) this.editor = editor;
 	};
 	image_crop_field() {
-		return (
-			<div>
-				<AvatarEditor
-					ref={this.setEditorRef}
-					image={this.state.image || '../../../../public/cat.jpg'}
-					width={450}
-					height={250}
-					border={50}
-					color={[255, 255, 255, 0.6]} // RGBA
-					scale={1}
-					rotate={0}
-				/>
-				<input name="newImage" type="file" onChange={this.handleNewImage} />
+		const isMyObjectEmpty = this.props.initialValues ? !Object.keys(this.props.initialValues).length : true;
 
-				<input type="button" onClick={this.handleSave} value="Preview" />
-				<br />
-				{!!this.state.preview && (
-					<img
-						src={this.state.preview.img}
-						style={{
-							borderRadius: `${(Math.min(this.state.preview.height, this.state.preview.width) + 10) *
-								(this.state.preview.borderRadius / 2 / 100)}px`
-						}}
-					/>
-				)}
-			</div>
-		);
+		{
+			if (isMyObjectEmpty) {
+				return (
+					<div>
+						<AvatarEditor
+							ref={this.setEditorRef}
+							image={this.state.image || '../../../../public/cat.jpg'}
+							width={450}
+							height={250}
+							border={50}
+							color={[255, 255, 255, 0.6]} // RGBA
+							scale={1}
+							rotate={0}
+						/>
+						<input name="newImage" type="file" onChange={this.handleNewImage} />
+						<input type="button" onClick={this.handleSave} value="Preview" />
+
+						<br />
+						{!!this.state.preview && (
+							<img
+								src={this.state.preview.img}
+								style={{
+									borderRadius: `${(Math.min(this.state.preview.height, this.state.preview.width) + 10) *
+										(this.state.preview.borderRadius / 2 / 100)}px`
+								}}
+							/>
+						)}
+					</div>
+				);
+			} else {
+				return (
+					<div className="row">
+						<img className="responsive-img" src={this.props.initialValues.cloudinary_img} />
+					</div>
+				);
+			}
+		}
 	}
 
 	renderContent() {
@@ -168,6 +189,9 @@ class ProjectForm extends Component {
 					<div className="row">
 						<div className="col s12"> {this.renderFields(formFields)}</div>
 					</div>
+
+					<Field component={TextAreaField} name="descr" label="Description"/>
+
 					{this.image_crop_field()}
 
 					<button type="submit" className="teal btn-flat right white-text">
