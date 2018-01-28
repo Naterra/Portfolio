@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import img from '../assets/img/parallax1.jpg';
+// import img from '../assets/img/parallax1.jpg';
+import img from '../assets/img/bg-code2.jpg';
 
 import { connect } from 'react-redux';
 import HeaderNav from './HeaderNav';
@@ -12,9 +13,9 @@ class Header extends Component {
 				<HeaderNav auth={this.props.auth} />
 
 				<div className="row">
-					<div className="parallax-container">
-						<div className="parallax">
-							<img alt="parallax" src={img} />
+					<div className="parallax-container"  >
+						<div className="parallax"  >
+							<img className="responsive-img"  alt="parallax" src={img} />
 						</div>
 					</div>
 				</div>
