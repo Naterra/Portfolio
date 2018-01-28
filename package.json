@@ -1,7 +1,7 @@
 {
-  "name": "MERN-Heroku-Starter-Kit",
+  "name": "Portfolio App",
   "version": "1.0.0",
-  "description": "MERN Heroku Starter Kit",
+  "description": "Portfolio App",
   "main": "server/index.js",
   "author": {
     "name": "Nataliia Baikina",
