@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Dropdown,NavItem} from 'react-materialize';
+import { Link } from 'react-router-dom';
+
 
 class UserWidgets extends Component {
 
@@ -13,6 +15,12 @@ class UserWidgets extends Component {
 							<a><i className="material-icons">view_module</i></a>
                         }>
 							<NavItem href='/admin/projects'>Projects</NavItem>
+							<Link
+								to='admin/projects'
+								className="left brand-logo"
+							>
+								Projects2
+							</Link>
 							<NavItem>Users</NavItem>
 							<NavItem divider />
 							<NavItem>Something</NavItem>
