@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import './App.css';
 
@@ -10,10 +10,9 @@ import { connect } from 'react-redux';
 import { fetchUser } from '../actions';
 
 import FrontPage from './FrontPage';
-import AdminProjectsPage  from './admin/AdminProjectsPage';
+import AdminProjectsPage from './admin/AdminProjectsPage';
 import UserExistsPage from './services/UserExistsPage';
 import NotFoundPage from './NotFoundPage';
-
 
 class App extends Component {
 	componentDidMount() {
@@ -22,16 +21,18 @@ class App extends Component {
 
 	render() {
 		return (
-			<BrowserRouter >
-			<div className="App">
-				<Route exact path="/" component={FrontPage} />
-				<Route exact path="/admin/projects" component={AdminProjectsPage} />
-				<Route exact path="/user_exist" component={UserExistsPage} />
-				<Route path="*" component={NotFoundPage}/>
-			</div>
+			<BrowserRouter>
+				<div className="App">
+					<Switch>
+						<Route exact path="/" component={FrontPage} />
+						<Route exact path="/admin/projects" component={AdminProjectsPage} />
+						<Route exact path="/user_exist" component={UserExistsPage} />
+						<Route component={NotFoundPage} />
+					</Switch>
+				</div>
 			</BrowserRouter>
 		);
 	}
 }
 
-export default connect(null, {fetchUser} )(App);
+export default connect(null, { fetchUser })(App);
