@@ -14,8 +14,8 @@ class UserWidgets extends Component {
 						<Dropdown trigger={
 							<a><i className="material-icons">view_module</i></a>
                         }>
-							<NavItem href='/admin/projects'>Projects</NavItem>
-							<li><Link to='/admin/projects'> Projects2	</Link></li>
+
+							<li><Link to='/admin/projects'> Projects </Link></li>
 							<NavItem>Users</NavItem>
 							<NavItem divider />
 							<NavItem>Something</NavItem>

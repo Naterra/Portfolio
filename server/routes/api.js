@@ -44,7 +44,7 @@ var uploads = multer({
 });
 
 router.post('/delete_project', (req, res) => {
-	const id = req.body._id;
+	const id = req.body.id;
 
 	Project.findByIdAndRemove(
 		{
