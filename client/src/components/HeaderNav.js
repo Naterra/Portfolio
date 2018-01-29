@@ -35,9 +35,6 @@ class HeaderNav extends Component {
 							<li>
 								<a href="">Blog</a>
 							</li>
-							<li>
-								<a href="">Blog</a>
-							</li>
 						</ul>
 
 						{this.renderLogin()}

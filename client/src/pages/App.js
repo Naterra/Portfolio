@@ -12,6 +12,7 @@ import { fetchUser } from '../actions';
 import FrontPage from './FrontPage';
 import AdminProjectsPage  from './admin/AdminProjectsPage';
 import UserExistsPage from './services/UserExistsPage';
+import NotFoundPage from './NotFoundPage';
 
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
 				<Route exact path="/" component={FrontPage} />
 				<Route exact path="/admin/projects" component={AdminProjectsPage} />
 				<Route exact path="/user_exist" component={UserExistsPage} />
+				<Route path="*" component={NotFoundPage}/>
 			</div>
 			</BrowserRouter>
 		);
