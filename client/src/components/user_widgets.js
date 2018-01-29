@@ -15,12 +15,7 @@ class UserWidgets extends Component {
 							<a><i className="material-icons">view_module</i></a>
                         }>
 							<NavItem href='/admin/projects'>Projects</NavItem>
-							<Link
-								to='admin/projects'
-								className="left brand-logo"
-							>
-								Projects2
-							</Link>
+							<li><Link to='/admin/projects'> Projects2	</Link></li>
 							<NavItem>Users</NavItem>
 							<NavItem divider />
 							<NavItem>Something</NavItem>
