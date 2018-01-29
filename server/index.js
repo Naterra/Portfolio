@@ -52,11 +52,14 @@ app.set('port', process.env.PORT || config.serverPort);
 // Routers
 import api_routes  from './routes/api' ;
 import auth_routes from './routes/authRoutes' ;
-//import routes from './routes/routes' ;
+import routes from './routes/routes' ;
 
 
+app.use('/', routes);
 app.use('/api', api_routes);
 app.use('/auth', auth_routes);
+
+
 
 
 if (process.env.NODE_ENV === 'production') {
