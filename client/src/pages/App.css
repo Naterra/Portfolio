@@ -42,3 +42,6 @@ textarea {
 	border-bottom: 0px;
 }
 
+.parallax-container {
+	height: 360px!important;
+}
