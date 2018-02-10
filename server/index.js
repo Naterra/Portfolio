@@ -60,6 +60,7 @@ if (process.env.NODE_ENV === 'production') {
 	// will try to find in client/build
 	const path = require('path');
 	app.get('*', (req, res) => {
+	    console.log('__dirname', __dirname);
 		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 	});
 }
