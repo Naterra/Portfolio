@@ -60,7 +60,7 @@ app.use('/api', api_routes);
 app.use('/auth', auth_routes);
 
 
-
+console.log('NODE_ENV', process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === 'production') {
     // Express will serve up production assets
