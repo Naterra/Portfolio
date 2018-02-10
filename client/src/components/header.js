@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 // import img from '../assets/img/parallax1.jpg';
-import img from '../assets/img/bg-code2.jpg';
+//import img from '../assets/img/bg_22338.jpg';
+//import img from '../assets/img/bg_8764.jpg';
+import img from '../assets/img/bg_4455443.jpg';
 
 import { connect } from 'react-redux';
 import HeaderNav from './HeaderNav';
