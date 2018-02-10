@@ -15,10 +15,11 @@
   "scripts": {
     "start": "node server_build/index.js",
     "prod:compile_server": "babel server -d server_build --presets es2016,stage-1",
+    "prod:build_prod": " npm run prod:compile_server && npm run build --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon --exec   babel-node server/index.js",
     "client": "npm run start --prefix client",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false  npm install --prefix client && npm run build --prefix client && npm run prod:compile_server",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false  npm install --prefix client && npm run prod:build_prod",
     "test": "jest"
   },
   "license": "ISC",
