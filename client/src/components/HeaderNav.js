@@ -22,7 +22,7 @@ class HeaderNav extends Component {
 	}
 	render() {
 		return (
-			<nav>
+			<nav className=" blue darken-1">
 				<div className="nav-wrapper">
 					<div className="left" style={{ marginLeft: '55px' }}>
 						<a href="/">
