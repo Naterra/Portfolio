@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import logo from '../logo.svg';
 import UserWidgets from './user_widgets';
@@ -25,9 +26,9 @@ class HeaderNav extends Component {
 			<nav className=" blue darken-1">
 				<div className="nav-wrapper">
 					<div className="left" style={{ marginLeft: '55px' }}>
-						<a href="/">
+						<Link to="/">
 							<img alt="logo" className="App-logo" src={logo} />
-						</a>
+						</Link>
 					</div>
 
 					<div className="right" style={{ display: 'block', marginRight:'45px', float: 'left', height:'100%' }}>

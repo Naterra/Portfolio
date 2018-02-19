@@ -4,7 +4,7 @@ import _ from 'lodash';
 import validateEmails from '../../utils/validateEmails';
 // Redux
 import { connect } from 'react-redux';
-import { saveProject, fetchProject } from '../../actions';
+import { saveProject } from '../../actions';
 import { Field, reduxForm } from 'redux-form';
 
 // Fields
@@ -232,7 +232,7 @@ function validate(values) {
 	return errors;
 }
 
-export default connect(mapStateToProps, { fetchProject, saveProject })(
+export default connect(mapStateToProps, {  saveProject })(
 	reduxForm({
 		form: 'ProjectForm',
 		validate: validate,

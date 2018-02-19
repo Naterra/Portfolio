@@ -7,28 +7,34 @@ import img from '../assets/img/bg_2344566.png';
 
 import { connect } from 'react-redux';
 import HeaderNav from './HeaderNav';
-
+import { withRouter } from 'react-router-dom';
 
 class Header extends Component {
+	render_parallax(){
+		return(
+			<div className="row">
+				<div className="parallax-container">
+					<div className="parallax">
+						<img className="no-responsive-img" alt="parallax" src={img} />
+					</div>
+				</div>
+			</div>
+		)
+	}
 	render() {
+		console.log('this', this);
+
 		return (
 			<header className="">
 				<HeaderNav auth={this.props.auth} />
 
-				<div className="row">
-					<div className="parallax-container"  >
-						<div className="parallax"  >
-							<img className="no-responsive-img"  alt="parallax" src={img} />
-						</div>
-					</div>
-				</div>
-
+				{ this.props.location.pathname =='/' ? this.render_parallax() : '' }
 			</header>
 		);
 	}
 }
-function mapStateToProps({auth}){
-    return { auth };
+function mapStateToProps({ auth }) {
+	return { auth };
 }
 
-export default connect(mapStateToProps)(Header);
+export default withRouter(connect(mapStateToProps)(Header));

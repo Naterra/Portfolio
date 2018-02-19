@@ -29,6 +29,21 @@ router.get('/test', (req, res) => {
 	res.send('OK');
 });
 
+// Get single project
+router.get('/fetch_project/:id', (req, res) => {
+    const id = req.params.id;
+    console.log('id++++', id);
+
+    Project.findById(id, (err, data) => {
+        if (err) {
+            console.log(err, 'err');
+            res.send(err);
+        }
+        res.send(data);
+    });
+});
+
+// Get all projects
 router.get('/get_projects', (req, res) => {
 	Project.find({}, null, { sort: { _id: -1 } }, (err, data) => {
 		if (err) {

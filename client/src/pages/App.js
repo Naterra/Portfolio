@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { fetchUser } from '../actions';
 
 import FrontPage from './FrontPage';
+import ProjectPage from './ProjectPage';
 import AdminProjectsPage from './admin/AdminProjectsPage';
 import UserExistsPage from './services/UserExistsPage';
 import NotFoundPage from './NotFoundPage';
@@ -25,6 +26,7 @@ class App extends Component {
 				<div className="App">
 					<Switch>
 						<Route exact path="/" component={FrontPage} />
+						<Route exact path="/project/:id" component={ProjectPage} />
 						<Route exact path="/admin/projects" component={AdminProjectsPage} />
 						<Route exact path="/user_exist" component={UserExistsPage} />
 						<Route component={NotFoundPage} />

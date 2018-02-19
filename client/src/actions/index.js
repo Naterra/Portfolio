@@ -46,7 +46,7 @@ export function delete_project(id){
 }
 
 export function fetchProject(id ) {
-    const request = axios.get(`/api/get_project/${id}`);
+    const request = axios.get(`/api/fetch_project/${id}`);
 
     return {
         type: types.FETCH_PROJECT,
