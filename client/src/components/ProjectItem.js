@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ProjectManagingLinks from './ProjectManagingLinks';
-
+import {withRouter} from "react-router-dom";
 
 class ProjectItem extends Component {
 	constructor(props) {
@@ -8,18 +8,26 @@ class ProjectItem extends Component {
 		this.onMouseEnter = this.onMouseEnter.bind(this);
 		this.onMouseLeave = this.onMouseLeave.bind(this);
 		this.edit_project = this.edit_project.bind(this);
+		this.cardClick = this.cardClick.bind(this);
 
+	}
+    cardClick(){
+		const link = '/project/'+this.props.project._id;
+
+		if(this.props.asLink){
+            this.props.history.push(link);
+		}
 	}
 	render_github() {
 		if (this.props.project.github_url) {
 			return (
-				<a href={this.props.project.github_url}>
+				<a target="_blank" href={this.props.project.github_url}>
 					<i className="fa fa-2x fa-github " aria-hidden="true" /> Github
 				</a>
 			);
 		} else {
 			return (
-				<a>
+				<a >
 					<i className="fa fa-2x fa-github " aria-hidden="true" /> Github
 				</a>
 			);
@@ -49,7 +57,7 @@ class ProjectItem extends Component {
 		console.log('ProjectItem: render' );
 
 		return (
-			<div onMouseEnter={this.onMouseEnter}  onMouseLeave={this.onMouseLeave} className="col  s12 m6 l4">
+			<div onClick={this.cardClick} onMouseEnter={this.onMouseEnter}  onMouseLeave={this.onMouseLeave} className="col  s12 m6 l4">
 				<div className="card">
 					{this.props.editable &&
 					<ProjectManagingLinks
@@ -64,10 +72,9 @@ class ProjectItem extends Component {
 
 					<div className="card-image">
 						<img alt="" src={project.cloudinary_img} />
-						<span className="card-title">{project.name}</span>
 					</div>
 					<div className="card-content">
-						<p>{project.description}</p>
+						<span className="card-title">{project.name}</span>
 					</div>
 					<div className="card-action">{this.render_github()}</div>
 				</div>
@@ -76,4 +83,4 @@ class ProjectItem extends Component {
 	}
 }
 
-export default ProjectItem;
+export default withRouter(ProjectItem);

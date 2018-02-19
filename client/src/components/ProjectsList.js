@@ -37,6 +37,7 @@ class ProjectsList extends Component {
 			return this.props.projects.map(item => {
 				return <ProjectItem
                     project={item}
+					asLink={this.props.asLink}
                     editable={this.props.editable}
                     delete_project={this.delete_project}
                     key={item._id}

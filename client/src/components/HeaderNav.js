@@ -30,8 +30,8 @@ class HeaderNav extends Component {
 						</a>
 					</div>
 
-					<div className="right" style={{ display: 'inline-flex', marginRight: '45px' }}>
-						<ul id="nav-mobile" className=" hide-on-med-and-down" style={{ marginRight: '25px', display: 'inline-block' }}>
+					<div className="right" style={{ display: 'block', marginRight:'45px', float: 'left', height:'100%' }}>
+						<ul id="nav-mobile" className=" hide-on-med-and-down" style={{ marginRight: '25px', display: 'inline' }}>
 							<li>
 								<a href="">Blog</a>
 							</li>

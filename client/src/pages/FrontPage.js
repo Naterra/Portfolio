@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../components/header';
+import Footer from '../components/Footer';
 import ProjectsList from '../components/ProjectsList';
 
 class FrontPage extends Component {
@@ -14,8 +15,9 @@ class FrontPage extends Component {
 				<Header />
 				<div className="container">
 					<h4 className="center">Welcome to my React Projects Page</h4>
-					<ProjectsList editable={false}/>
+					<ProjectsList asLink="true" editable={false}/>
 				</div>
+				<Footer />
 			</div>
 		);
 	}
